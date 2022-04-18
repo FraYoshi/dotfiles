@@ -1,0 +1,10 @@
+[Unit]
+Description=glava visualizer with jack
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/glava --desktop -r "setsource auto"
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

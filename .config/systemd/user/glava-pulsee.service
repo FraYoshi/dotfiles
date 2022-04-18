@@ -1,0 +1,10 @@
+[Unit]
+Description=glava visualizerwith pulseeffects
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/glava --desktop -r "setsource PulseEffects_apps.monitor"
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

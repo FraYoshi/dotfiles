@@ -1,0 +1,1 @@
+/home/frayoshi/ABC/Scopes/Scopes.sh

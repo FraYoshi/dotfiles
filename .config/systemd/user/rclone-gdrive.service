@@ -1,0 +1,12 @@
+[Unit]
+Description=google drive mount
+After=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/home/frayoshi/bin/rclone/GDRIVEmount.sh
+ExecStop=/home/frayoshi/bin/rclone/GDRIVEumount.sh
+
+[Install]
+WantedBy=default.target

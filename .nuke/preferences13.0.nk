@@ -1,0 +1,22 @@
+Preferences {
+ inputs 0
+ name Preferences
+ localCachePath /n/home/frayoshi/.cache/nuke/localize
+ LocalizationSizeLimit 15
+ viewer_texture_vram 1950
+ DiskCachePath /n/home/frayoshi/.cache/nuke/comp
+ diskCacheGB 20
+ TimelineDiskCachePath /n/home/frayoshi/.cache/nuke/TimelineCache
+ TimelineDiskCacheLimit 40
+ PaintCacheGB 20
+ undoLimitMB 1024
+ selectedGPUDeviceName "NVIDIA GeForce GTX 1050 Ti"
+ BlinkCacheMemoryPercentage 31.1
+ platformPathRemaps ""
+ maxPanels 3
+ defaultBufferDepth float
+ defaultGPUForViewer true
+ defaultGPUForInputs true
+ RenderWithFrameServer true
+ defaultFlipbook "Flipbook Viewer"
+}

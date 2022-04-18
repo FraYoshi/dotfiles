@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<jack_mixer geometry="334x454" paned_position="262" visible="True">
+	<input_channel name="zoom" type="stereo" direct_output="True" volume="0.000000" balance="0.000000" wide="True" out_mute="False" volume_midi_cc="15" balance_midi_cc="16" mute_midi_cc="17" solo_midi_cc="18"/>
+	<input_channel name="decklink" type="stereo" direct_output="True" volume="0.000000" balance="0.000000" wide="True" out_mute="False" volume_midi_cc="11" balance_midi_cc="12" mute_midi_cc="13" solo_midi_cc="14"/>
+	<input_channel name="pulse" type="stereo" direct_output="True" volume="-inf" balance="0.000000" wide="True" out_mute="False" volume_midi_cc="19" balance_midi_cc="20" mute_midi_cc="21" solo_midi_cc="22"/>
+	<input_channel name="cam-fissa" type="stereo" direct_output="True" volume="0.000000" balance="0.000000" wide="True" out_mute="False" volume_midi_cc="26" balance_midi_cc="27" mute_midi_cc="28" solo_midi_cc="29"/>
+	<output_channel name="ALL" type="stereo" color="rgb(44,253,186)" volume="-inf" balance="0.000000" wide="True" out_mute="False" volume_midi_cc="23" balance_midi_cc="24" mute_midi_cc="25"/>
+	<gui_factory confirm-quit="True" default_meter_scale="linear_70dB" default_project_path="" default_slider_scale="linear_70dB" midi_behavior_mode="0" use_custom_widgets="True" vumeter_color="#ccccb3b30000" vumeter_color_scheme="default"/>
+</jack_mixer>

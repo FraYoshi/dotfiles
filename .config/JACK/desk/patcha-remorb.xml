@@ -1,0 +1,254 @@
+<!DOCTYPE patchbay>
+<patchbay version="0.9.2" name="patcha-remorb">
+ <output-sockets>
+  <socket exclusive="off" client="Family\ 17h\ \(Models\ 00h\-0fh\)\ HD\ Audio\ Controller\ Analog\ Stereo\ Input" name="Line-in" type="jack-audio">
+   <plug>capture_FL</plug>
+   <plug>capture_FR</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-mic" type="jack-audio">
+   <plug>mic\ Out\ L</plug>
+   <plug>mic\ Out\ R</plug>
+  </socket>
+  <socket exclusive="off" client="vlc_[0-9]+" name="vlc_[0-9]+ 1" type="jack-audio">
+   <plug>vlc_[0-9]+_out_1</plug>
+   <plug>vlc_[0-9]+_out_2</plug>
+  </socket>
+  <socket exclusive="off" client="audacious" name="audac" type="jack-audio">
+   <plug>out_0</plug>
+   <plug>out_1</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-out" type="jack-audio">
+   <plug>out\ L</plug>
+   <plug>out\ R</plug>
+  </socket>
+  <socket exclusive="off" client="Chromium" name="Chrom-OBS" type="jack-audio">
+   <plug>output_FL</plug>
+   <plug>output_FR</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-chrom" type="jack-audio">
+   <plug>chromium\ Out\ L</plug>
+   <plug>chromium\ Out\ R</plug>
+  </socket>
+  <socket exclusive="off" client="ALSA\ plug\-in\ \[audacious\]" name="alsa-audac" type="jack-audio">
+   <plug>output_FL</plug>
+   <plug>output_FR</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-vlc" type="jack-audio">
+   <plug>vlc\ Out\ L</plug>
+   <plug>vlc\ Out\ R</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-audac" type="jack-audio">
+   <plug>audacious\ Out\ L</plug>
+   <plug>audacious\ Out\ R</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-mpv" type="jack-audio">
+   <plug>mpv\ Out\ L</plug>
+   <plug>mpv\ Out\ R</plug>
+  </socket>
+  <socket exclusive="off" client="Family\ 17h\ \(Models\ 00h\-0fh\)\ HD\ Audio\ Controller\ Analog\ Stereo\ Input" name="Line-in" type="jack-audio">
+   <plug>capture_FL</plug>
+   <plug>capture_FR</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-mic" type="jack-audio">
+   <plug>mic\ Out\ L</plug>
+   <plug>mic\ Out\ R</plug>
+  </socket>
+  <socket exclusive="off" client="vlc_[0-9]+" name="vlc_[0-9]+ 1" type="jack-audio">
+   <plug>vlc_[0-9]+_out_1</plug>
+   <plug>vlc_[0-9]+_out_2</plug>
+  </socket>
+  <socket exclusive="off" client="audacious" name="audac" type="jack-audio">
+   <plug>out_0</plug>
+   <plug>out_1</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-out" type="jack-audio">
+   <plug>out\ L</plug>
+   <plug>out\ R</plug>
+  </socket>
+  <socket exclusive="off" client="Chromium" name="Chrom-OBS" type="jack-audio">
+   <plug>output_FL</plug>
+   <plug>output_FR</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-chrom" type="jack-audio">
+   <plug>chromium\ Out\ L</plug>
+   <plug>chromium\ Out\ R</plug>
+  </socket>
+  <socket exclusive="off" client="ALSA\ plug\-in\ \[audacious\]" name="alsa-audac" type="jack-audio">
+   <plug>output_FL</plug>
+   <plug>output_FR</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-vlc" type="jack-audio">
+   <plug>vlc\ Out\ L</plug>
+   <plug>vlc\ Out\ R</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-audac" type="jack-audio">
+   <plug>audacious\ Out\ L</plug>
+   <plug>audacious\ Out\ R</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-mpv" type="jack-audio">
+   <plug>mpv\ Out\ L</plug>
+   <plug>mpv\ Out\ R</plug>
+  </socket>
+  <socket exclusive="off" client="Family\ 17h\ \(Models\ 00h\-0fh\)\ HD\ Audio\ Controller\ Analog\ Stereo\ Input" name="Line-in" type="jack-audio">
+   <plug>capture_FL</plug>
+   <plug>capture_FR</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-mic" type="jack-audio">
+   <plug>mic\ Out\ L</plug>
+   <plug>mic\ Out\ R</plug>
+  </socket>
+  <socket exclusive="off" client="vlc_[0-9]+" name="vlc_[0-9]+ 1" type="jack-audio">
+   <plug>vlc_[0-9]+_out_1</plug>
+   <plug>vlc_[0-9]+_out_2</plug>
+  </socket>
+  <socket exclusive="off" client="audacious" name="audac" type="jack-audio">
+   <plug>out_0</plug>
+   <plug>out_1</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-out" type="jack-audio">
+   <plug>out\ L</plug>
+   <plug>out\ R</plug>
+  </socket>
+  <socket exclusive="off" client="Chromium" name="Chrom-OBS" type="jack-audio">
+   <plug>output_FL</plug>
+   <plug>output_FR</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-chrom" type="jack-audio">
+   <plug>chromium\ Out\ L</plug>
+   <plug>chromium\ Out\ R</plug>
+  </socket>
+  <socket exclusive="off" client="ALSA\ plug\-in\ \[audacious\]" name="alsa-audac" type="jack-audio">
+   <plug>output_FL</plug>
+   <plug>output_FR</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-vlc" type="jack-audio">
+   <plug>vlc\ Out\ L</plug>
+   <plug>vlc\ Out\ R</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-audac" type="jack-audio">
+   <plug>audacious\ Out\ L</plug>
+   <plug>audacious\ Out\ R</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-mpv" type="jack-audio">
+   <plug>mpv\ Out\ L</plug>
+   <plug>mpv\ Out\ R</plug>
+  </socket>
+ </output-sockets>
+ <input-sockets>
+  <socket exclusive="off" client="jack_mixer" name="mix-mic" type="jack-audio">
+   <plug>mic\ L</plug>
+   <plug>mic\ R</plug>
+  </socket>
+  <socket exclusive="off" client="JACK\-OBS\-mic" name="OBS-mic" type="jack-audio">
+   <plug>in_1</plug>
+   <plug>in_2</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-vlc" type="jack-audio">
+   <plug>vlc\ L</plug>
+   <plug>vlc\ R</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-audac" type="jack-audio">
+   <plug>audacious\ L</plug>
+   <plug>audacious\ R</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-chrom" type="jack-audio">
+   <plug>chromium\ L</plug>
+   <plug>chromium\ R</plug>
+  </socket>
+  <socket exclusive="off" client="JACK\-OBS\-IN" name="OBS-in" type="jack-audio">
+   <plug>in_1</plug>
+   <plug>in_2</plug>
+  </socket>
+  <socket exclusive="off" client="glava" name="glava" type="jack-audio">
+   <plug>input_FL</plug>
+   <plug>input_FR</plug>
+  </socket>
+  <socket exclusive="off" client="Family\ 17h\ \(Models\ 00h\-0fh\)\ HD\ Audio\ Controller\ Analog\ Stereo\ Output" name="desk-out" type="jack-audio">
+   <plug>playback_FL</plug>
+   <plug>playback_FR</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-mic" type="jack-audio">
+   <plug>mic\ L</plug>
+   <plug>mic\ R</plug>
+  </socket>
+  <socket exclusive="off" client="JACK\-OBS\-mic" name="OBS-mic" type="jack-audio">
+   <plug>in_1</plug>
+   <plug>in_2</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-vlc" type="jack-audio">
+   <plug>vlc\ L</plug>
+   <plug>vlc\ R</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-audac" type="jack-audio">
+   <plug>audacious\ L</plug>
+   <plug>audacious\ R</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-chrom" type="jack-audio">
+   <plug>chromium\ L</plug>
+   <plug>chromium\ R</plug>
+  </socket>
+  <socket exclusive="off" client="JACK\-OBS\-IN" name="OBS-in" type="jack-audio">
+   <plug>in_1</plug>
+   <plug>in_2</plug>
+  </socket>
+  <socket exclusive="off" client="glava" name="glava" type="jack-audio">
+   <plug>input_FL</plug>
+   <plug>input_FR</plug>
+  </socket>
+  <socket exclusive="off" client="Family\ 17h\ \(Models\ 00h\-0fh\)\ HD\ Audio\ Controller\ Analog\ Stereo\ Output" name="desk-out" type="jack-audio">
+   <plug>playback_FL</plug>
+   <plug>playback_FR</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-mic" type="jack-audio">
+   <plug>mic\ L</plug>
+   <plug>mic\ R</plug>
+  </socket>
+  <socket exclusive="off" client="JACK\-OBS\-mic" name="OBS-mic" type="jack-audio">
+   <plug>in_1</plug>
+   <plug>in_2</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-vlc" type="jack-audio">
+   <plug>vlc\ L</plug>
+   <plug>vlc\ R</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-audac" type="jack-audio">
+   <plug>audacious\ L</plug>
+   <plug>audacious\ R</plug>
+  </socket>
+  <socket exclusive="off" client="jack_mixer" name="mix-chrom" type="jack-audio">
+   <plug>chromium\ L</plug>
+   <plug>chromium\ R</plug>
+  </socket>
+  <socket exclusive="off" client="JACK\-OBS\-IN" name="OBS-in" type="jack-audio">
+   <plug>in_1</plug>
+   <plug>in_2</plug>
+  </socket>
+  <socket exclusive="off" client="glava" name="glava" type="jack-audio">
+   <plug>input_FL</plug>
+   <plug>input_FR</plug>
+  </socket>
+  <socket exclusive="off" client="Family\ 17h\ \(Models\ 00h\-0fh\)\ HD\ Audio\ Controller\ Analog\ Stereo\ Output" name="desk-out" type="jack-audio">
+   <plug>playback_FL</plug>
+   <plug>playback_FR</plug>
+  </socket>
+ </input-sockets>
+ <slots/>
+ <cables>
+  <cable input="mix-mic" output="Line-in" type="jack-audio"/>
+  <cable input="OBS-mic" output="mix-mic" type="jack-audio"/>
+  <cable input="mix-vlc" output="vlc_[0-9]+ 1" type="jack-audio"/>
+  <cable input="mix-audac" output="audac" type="jack-audio"/>
+  <cable input="glava" output="mix-out" type="jack-audio"/>
+  <cable input="mix-chrom" output="Chrom-OBS" type="jack-audio"/>
+  <cable input="OBS-in" output="mix-chrom" type="jack-audio"/>
+  <cable input="desk-out" output="mix-chrom" type="jack-audio"/>
+  <cable input="OBS-in" output="alsa-audac" type="jack-audio"/>
+  <cable input="desk-out" output="mix-vlc" type="jack-audio"/>
+  <cable input="OBS-in" output="mix-vlc" type="jack-audio"/>
+  <cable input="OBS-in" output="mix-audac" type="jack-audio"/>
+  <cable input="desk-out" output="mix-audac" type="jack-audio"/>
+  <cable input="OBS-in" output="mix-mpv" type="jack-audio"/>
+  <cable input="desk-out" output="mix-mpv" type="jack-audio"/>
+ </cables>
+</patchbay>
+

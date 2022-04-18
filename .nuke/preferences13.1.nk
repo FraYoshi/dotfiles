@@ -1,0 +1,26 @@
+Preferences {
+ inputs 0
+ name Preferences
+ localCachePath /n/home/frayoshi/.cache/nuke/localize
+ autoLocalCachePath /web/
+ LocalizationSizeLimit 1100
+ LocalizationUseSourceWhenOutOfDate true
+ LocalizationPauseOnProjectLoad true
+ viewer_texture_vram 1950
+ DiskCachePath /n/home/frayoshi/.cache/nuke/comp
+ diskCacheGB 100
+ TimelineDiskCachePath /n/home/frayoshi/.cache/nuke/TimelineCache
+ TimelineDiskCacheLimit 40
+ PaintCacheGB 100
+ undoLimitMB 1024
+ selectedGPUDeviceName "no GPU available"
+ BlinkCacheMemoryPercentage 31.1
+ platformPathRemaps ""
+ maxPanels 3
+ UISequenceDisplayMode "Printf Notation (%d)"
+ defaultBufferDepth float
+ defaultGPUForViewer true
+ defaultGPUForInputs true
+ RenderWithFrameServer true
+ defaultFlipbook "Flipbook Viewer"
+}

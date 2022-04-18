@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<jack_mixer geometry="544x420" paned_position="409" visible="True">
+	<input_channel name="audacious" type="stereo" direct_output="True" volume="-34.486893" balance="0.000000" wide="True" meter_prefader="False" out_mute="False" volume_midi_cc="11" balance_midi_cc="12" mute_midi_cc="13" solo_midi_cc="14"/>
+	<input_channel name="vlc" type="stereo" direct_output="True" volume="-34.991135" balance="0.000000" wide="True" meter_prefader="False" out_mute="False" volume_midi_cc="18" balance_midi_cc="19" mute_midi_cc="20" solo_midi_cc="21"/>
+	<input_channel name="mpv" type="stereo" direct_output="True" volume="-34.407430" balance="0.000000" wide="True" meter_prefader="False" out_mute="False" volume_midi_cc="22" balance_midi_cc="23" mute_midi_cc="24" solo_midi_cc="25"/>
+	<input_channel name="line" type="stereo" direct_output="True" volume="0.000000" balance="0.000000" wide="True" meter_prefader="False" out_mute="False" volume_midi_cc="26" balance_midi_cc="27" mute_midi_cc="28" solo_midi_cc="29"/>
+	<input_channel name="chromium" type="stereo" direct_output="True" volume="-27.504001" balance="0.000000" wide="True" meter_prefader="False" out_mute="False" volume_midi_cc="30" balance_midi_cc="31" mute_midi_cc="32" solo_midi_cc="33"/>
+	<output_channel name="ALL" type="stereo" color="rgb(233,162,42)" volume="0.000000" balance="0.000000" wide="True" meter_prefader="False" out_mute="False" volume_midi_cc="15" balance_midi_cc="16" mute_midi_cc="17"/>
+	<gui_factory confirm-quit="True" default_meter_scale="linear_70dB" default_project_path="/home/frayoshi/.config/jack_mixer" default_slider_scale="linear_70dB" midi_behavior_mode="0" use_custom_widgets="True" vumeter_color="#ccccb3b30000" vumeter_color_scheme="default" auto_reset_peak_meters="False" auto_reset_peak_meters_time_seconds="2.0" meter_refresh_period_milliseconds="33"/>
+</jack_mixer>

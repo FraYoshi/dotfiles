@@ -1,0 +1,11 @@
+app=showfoto
+last_user=
+screenshot_dir=file:///home/frayoshi
+action=1
+delay=3
+region=3
+show_mouse=1
+last_extension=png
+enable_imgur_upload=true
+show_border=1
+

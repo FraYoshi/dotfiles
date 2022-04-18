@@ -1,0 +1,881 @@
+#+TITLE: emacs configuration ([[https://www.youtube.com/watch?v=SzA2YODtgK4][style from Harry Schwartz]])
+#+TODO: TODO TESTING BROKEN OFF
+
+* Set personal information
+
+  #+BEGIN_SRC emacs-lisp
+  (setq user-full-name "Francesco Yoshi Gobbo"
+	user-mail-address "yoshi@fgobbo.com")
+  #+END_SRC
+  
+* basic
+** Disable cl error
+   #+BEGIN_SRC emacs-lisp
+     (setq byte-compile-warnings '(cl-functions))
+   #+END_SRC
+** Disable beep
+
+#+BEGIN_SRC emacs-lisp
+(setq visible-bell t)
+#+END_SRC
+
+** disable backup
+
+#+BEGIN_SRC emacs-lisp
+  (setq backup-inibited t)
+#+END_SRC
+
+** OFF ASCII as default character set
+;   #+BEGIN_SRC emacs-lisp
+   (setq set-language-environment 'ASCII)
+   #+END_SRC
+** OFF disable auto-save
+
+   ; #+BEGIN_SRC emacs-lisp
+  (setq auto-save-default nil)
+  #+END_SRC
+** BROKEN split window and follow
+;   #+begin_src emacs-lisp
+     ;; code by Dawid Eckert https://github.com/daedreth/UncleDavesEmacs
+     (defun split-and-follow-horizontally ()
+       (interactive)
+       (split-window-below)
+       (balance-windows)
+       (other-window 1))
+     (global-set-key (kbd "C-x 2") 'split-and-follow-horizontally)
+
+     (defun split-and-follow-vertically ()
+       (interactive)
+       (split-window-right)
+       (balance-windows)
+       (other-window 1))
+     (global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
+;   #+end_src
+** save backup and autosave to /tmp
+
+#+BEGIN_SRC emacs-lisp
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+#+END_SRC
+
+** y/n instead of yes/no
+
+#+BEGIN_SRC emacs-lisp
+(fset 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+** UTF-8 everywhere
+#+BEGIN_SRC emacs-lisp
+    (setq utf-translate-cjk-mode nil) ; disable CJK coding/encoding (Chinese/Japanese/Korean characters)
+    (set-language-environment 'utf-8)
+    (set-keyboard-coding-system 'utf-8-mac) ; For old Carbon emacs on OS X only
+    (setq locale-coding-system 'utf-8)
+    (set-default-coding-systems 'utf-8)
+    (set-terminal-coding-system 'utf-8)
+    (set-selection-coding-system
+      (if (eq system-type 'windows-nt)
+	  'utf-16-le  ;; https://rufflewind.com/2014-07-20/pasting-unicode-in-emacs-on-windows
+	'utf-8))
+    (prefer-coding-system 'utf-8)
+#+END_SRC
+
+** start deleting selected
+   #+BEGIN_SRC emacs-lisp
+   (pending-delete-mode t)
+   #+END_SRC
+** manage window frames
+*** BROKEN switch-window
+;   #+BEGIN_SRC emacs-lisp
+     (use-package switch-window
+       :ensure t
+       :config
+       (setq switch-window-input-style 'minibuffer)
+       (setq switch-window-increase 4)
+       (setq switch-window-threshold 2)
+       (setq switch-window-shortcut-style 'qwerty)
+       (setq switch-window-qwerty-shortcuts
+	     '("a" "s" "d" "f" "j" "k" "l"))
+       :bind
+       ([remap other-window] . switch-window)
+     )
+   #+END_SRC
+*** TESTING ace-window [[[https://github.com/abo-abo/ace-window][github]]][[[ace-window][key]]]
+    #+begin_src emacs-lisp
+    ;(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+    (defvar aw-dispatch-alist
+  '((?x aw-delete-window "Delete Window")
+	(?m aw-swap-window "Swap Windows")
+	(?M aw-move-window "Move Window")
+	(?c aw-copy-window "Copy Window")
+	(?j aw-switch-buffer-in-window "Select Buffer")
+	(?n aw-flip-window)
+	(?u aw-switch-buffer-other-window "Switch Buffer Other Window")
+	(?c aw-split-window-fair "Split Fair Window")
+	(?v aw-split-window-vert "Split Vert Window")
+	(?b aw-split-window-horz "Split Horz Window")
+	(?o delete-other-windows "Delete Other Windows")
+	(?? aw-show-dispatch-help))
+  "List of actions for `aw-dispatch-default'.")
+    #+END_SRC
+** OFF epg-to-GPG-version
+;   #+BEGIN_SRC emacs-lisp
+   (setq epg-gpg-program "gpg2")
+   #+END_SRC
+* Package repositories
+
+#+BEGIN_SRC emacs-lisp
+  (require 'package)
+ 
+  (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+;  (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
+ 
+  (setq package-enable-at-startup nil)
+  (package-initialize)
+#+END_SRC
+
+* package installed
+** OFF mozc
+'   #+BEGIN_SRC emacs-lisp
+     (require 'mozc)  ; or (load-file "/path/to/mozc.el")
+     (setq default-input-method "japanese-mozc")
+   #+END_SRC
+** emojify
+   emoji visualization in emacs
+   https://github.com/iqbalansari/emacs-emojify
+   #+begin_src emacs-lisp
+     (use-package emojify
+       :hook (after-init . global-emojify-mode))
+   #+end_src
+** vertico [[[https://www.youtube.com/watch?v=J0OaRy85MOo][video reference]]]
+   #+begin_src emacs-lisp
+     (use-package vertico
+       :ensure t
+       :init
+       (vertico-mode))
+   #+end_src
+** savehist
+   package that complements vertico, moving recent files to the top of the list
+   #+begin_src emacs-lisp
+     (use-package savehist
+       :init
+       (savehist-mode))
+   #+end_src
+** marginalia
+   package that complements vertico
+   #+begin_src emacs-lisp
+     (use-package marginalia
+       :after vertico
+       :ensure t
+       :custom
+       (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
+       :init
+       (marginalia-mode))
+   #+end_src
+** expand-region [[[expand-region][key]]] [[[https://github.com/magnars/expand-region.el][doc]]]
+   #+BEGIN_SRC emacs-lisp
+   (require 'expand-region)
+   #+END_SRC
+** plantUML
+   #+BEGIN_SRC emacs-lisp
+     ;; active Org-babel languages
+     (org-babel-do-load-languages
+      'org-babel-load-languages
+      '(;; other Babel languages
+	(plantuml . t)))
+
+     ;(require 'plantuml-mode)
+     (setq org-plantuml-jar-path "/opt/ABC/plantuml.jar")
+     ; (setq plantuml-jar-path "/usr/share/java/plantuml/plantuml.jar")
+   #+END_SRC
+** org-roam
+   #+begin_src emacs-lisp
+     (use-package org-roam
+       :ensure t
+       :custom
+       (org-roam-directory "/home/CLOUD/syncthing/roam")
+       (org-roam-dailies-directory "journal/") ;; relative path, must exist.
+       (org-roam-completion-everywhere t)
+       (org-roam-capture-templates
+	'(
+	  ("d" "default" plain
+	   "%?"
+	   :if-new (file+head "${slug}.org" "#+title: ${title}\n#+date: %U\n")
+      ;; original was file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+      ;; for template files https://systemcrafters.net/build-a-second-brain-in-emacs/capturing-notes-efficiently/
+	   :unnarrowed t)
+	  ("t" "tag" plain
+	   "%?"
+	   :if-new (file+head "${slug}.org" "#+title: ${title}\n#+date: %U\n#+filetags:")
+	   :unnarrowed t)
+	  ("I" "index" plain
+	   "%?"
+	   :if-new (file+head "${slug}.org" "#+title: ${title}\n#+date: %U\n#+filetags: index\n")
+	   :unnarrowed t)
+	  ("i" "idea" plain
+	   "%?"
+	   :if-new (file+head "${slug}.org" "#+title: ${title}\n#+date: %U\n#+filetags: idea\n")
+	   :unnarrowed t)
+	  ("p" "people" plain
+	   "%?"
+	   :if-new (file+head "${slug}.org" "#+title: ${title}\n#+date: %U\n#+filetags: people\n")
+	   :unnarrowed t)
+	  ("s" "sogno" plain
+	   "%?"
+	   :if-new (file+head "sogni/sogno-%<%Y-%m-%d>.org" "#+title: sogno %<%Y-%m-%d>\n#+filetags: sogno\n")
+	   :unnarrowed t)
+	  ("c" "coding" plain
+	   "%?"
+	   :if-new (file+head "${slug}.org" "#+title: ${title}\n#+date: %U\n#+filetags: coding\n")
+	   :unnarrowed t)
+	  ))
+       :bind (("C-c n l" . org-roam-buffer-toggle)
+	      ("C-c n f" . org-roam-node-find)
+	      ("C-c n i" . org-roam-node-insert)
+	      ("C-c n I" . org-roam-node-insert-immediate)
+	      :map org-mode-map
+	      ("C-M-i"   . completion-at-point)
+	      :map org-roam-dailies-map
+	      ("Y"       . yesterday)
+	      ("T"       . tomorrow))
+       :bind-keymap
+       ("C-c n d" . org-roam-dailies-map)
+       :config
+       (require 'org-roam-dailies) ;; ensures the keymap is available
+
+     ;; insert node without opening a window
+       (defun org-roam-node-insert-immediate (arg &rest args)
+       (interactive "P")
+       (let ((args (cons arg args))
+	     (org-roam-capture-templates (list (append (car org-roam-capture-templates)
+						       '(:immediate-finish t)))))
+	 (apply #'org-roam-node-insert args)))
+
+       (org-roam-setup))
+   #+end_src
+* Keybinds
+** Disable keys
+
+#+BEGIN_SRC emacs-lisp
+  (global-unset-key (kbd "C-z"))
+#+END_SRC
+
+** remapped
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "s-h") 'suspend-frame)
+#+END_SRC
+** TESTING delete instead of kill for alt backspace
+   code by http://xahlee.info/emacs/emacs/emacs_kill-ring.html
+   found on https://emacs.stackexchange.com/questions/22266/backspace-without-adding-to-kill-ring
+   #+begin_src emacs-lisp
+     (defun my-delete-word (arg)
+       "Delete characters forward until encountering the end of a word.
+     With argument, do this that many times.
+     This command does not push text to `kill-ring'."
+       (interactive "p")
+       (delete-region
+	(point)
+	(progn
+	  (forward-word arg)
+	  (point))))
+
+     (defun my-backward-delete-word (arg)
+       "Delete characters backward until encountering the beginning of a word.
+     With argument, do this that many times.
+     This command does not push text to `kill-ring'."
+       (interactive "p")
+       (my-delete-word (- arg)))
+
+     (defun my-delete-line ()
+       "Delete text from current position to end of line char.
+     This command does not push text to `kill-ring'."
+       (interactive)
+       (delete-region
+	(point)
+	(progn (end-of-line 1) (point)))
+       (delete-char 1))
+
+     (defun my-delete-line-backward ()
+       "Delete text between the beginning of the line to the cursor position.
+     This command does not push text to `kill-ring'."
+       (interactive)
+       (let (p1 p2)
+	 (setq p1 (point))
+	 (beginning-of-line 1)
+	 (setq p2 (point))
+	 (delete-region p1 p2)))
+
+     ;; bind them to emacs's default shortcut keys:
+     ; (global-set-key (kbd "C-S-k") 'my-delete-line-backward) ; Ctrl+Shift+k
+     ; (global-set-key (kbd "C-k") 'my-delete-line)
+     (global-set-key (kbd "M-d") 'my-delete-word)
+     (global-set-key (kbd "<M-backspace>") 'my-backward-delete-word)
+   #+end_src
+** z-maps (C-1 shortcuts) [[[https://www.youtube.com/watch?v=tjnK1rkO7RU][by Mike Zamansky]]]
+   #+BEGIN_SRC emacs-lisp
+     (define-prefix-command 'z-map)
+     (global-set-key (kbd "C-1") 'z-map)
+
+     (define-key z-map (kbd "e") 'elfeed)
+     (define-key z-map (kbd "a") 'org-agenda)
+     ;; TESTING
+     (define-key z-map (kbd "1") 'org-global-cycle)
+     ;; TO INSTALL
+     ;(define-key z-map (kbd "s") 'flyspell-correct-word-before-point)
+     ;; TO OPEN A SPECIFIC FILE
+     ;(define-key z-map (kbd "i") (lambda () (interactive) (find-file "path/to/file.org")))
+   #+END_SRC
+** hydra (C-x ...) [[[https://cestlaz.github.io/posts/using-emacs-30-elfeed-2][by Mike Zamansky]]]
+   #+BEGIN_SRC emacs-lisp
+     (use-package hydra
+     :ensure t)
+   #+END_SRC
+*** toggles [t]
+    #+BEGIN_SRC emacs-lisp
+      ;; Hydra for modes that toggle on and off
+      (global-set-key
+       (kbd "C-x t")
+       (defhydra toggle (:color blue)
+	 "toggle"
+	 ("a" abbrev-mode "abbrev")
+	 ("f" auto-fill-mode "fill")
+	 ;("s" flyspell-mode "flyspell")
+	 ("d" toggle-debug-on-error "debug")
+	 ("c" fci-mode "fCi")
+	 ("t" toggle-truncate-lines "truncate")
+	 ("w" whitespace-mode "whitespace")
+	 ("q" nil "cancel")
+	 ))
+    #+END_SRC
+*** navigation [j]ump
+    #+BEGIN_SRC emacs-lisp
+     ;; Hydra for navigation
+     (global-set-key
+      (kbd "C-x j")
+      (defhydra gotoline
+	( :pre (linum-mode 1)
+	       :post (linum-mode -1))
+	"goto"
+	("t" (lambda () (interactive)(move-to-window-line-top-bottom 0)) "top")
+	("b" (lambda () (interactive)(move-to-window-line-top-bottom -1)) "bottom")
+	("m" (lambda () (interactive)(move-to-window-line-top-bottom)) "middle")
+	("e" (lambda () (interactive)(end-of-buffer)) "end")
+	("c" recenter-top-bottom "recenter")
+	("n" next-line "down")
+	("p" (lambda () (interactive) (forward-line -1))  "up")
+	("g" goto-line "goto-line")
+	("q" nil "cancel")
+	))
+    #+END_SRC
+*** org [g]
+    (problems with "o")
+    cannot longer switch window.
+    #+BEGIN_SRC emacs-lisp
+      ;; Hydra for some org-mode stuff
+      (global-set-key
+       (kbd "C-x g")
+       (defhydra hydra-global-org (:color blue)
+	 "Org"
+	 ("r" org-clone-subtree-with-time-shift "Repeat Todo")
+	 ("p" org-timer-start "Start Timer")
+	 ("s" org-timer-stop "Stop Timer")
+	 ("t" org-timer-set-timer "Set Timer") ; This one requires you be in an orgmode doc, as it sets the timer for the header
+	 ("b" org-timer "Print Timer") ; output timer value to buffer
+      ;   ("w" (org-clock-in '(4)) "Clock-In") ; used with (org-clock-persistence-insinuate) (setq org-clock-persist t)
+      ;   ("o" org-clock-out "Clock-Out") ; you might also want (setq org-log-note-clock-out t)
+      ;   ("j" org-clock-goto "Clock Goto") ; global visit the clocked task
+      ;   ("c" org-capture "Capture") ; Don't forget to define the captures you want http://orgmode.org/manual/Capture.html
+      ;   ("l" (or )rg-capture-goto-last-stored "Last Capture")
+	 ))
+    #+END_SRC
+*** encryption [e] [[[epg-to-GPG-version][GPG-config]]] [[[https://www.gnu.org/software/emacs/manual/html_mono/epa.html][docs]]]
+    #+BEGIN_SRC emacs-lisp
+      (global-set-key
+       (kbd "C-x e")
+       (defhydra hydra-encrypt (:color yellow)
+	 "epa GPG"
+	 ("e" epa-encrypt-region "encrypt region")
+	 ("d" epa-decrypt-region "decrypt region")
+	 ("a" epa-decrypt-armor-in-region "decrypt armor in region")
+	 ("E" epa-encrypt-file "encrypt file")
+	 ("D" epa-decrypt-file "decrypt file")
+	 ("v" epa-verify-region "verify region")
+	 ("V" epa-verify-file "verify file")
+	 ("s" epa-sign-region "sign region")
+	 ("S" epa-sign-file "sign file")
+	 )
+      )
+    #+END_SRC
+** agenda
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-x C-a") 'org-agenda)
+#+END_SRC
+** OFF Make fcitx user-friendly (super)
+
+;#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "s-SPC") 'toggle-input-method) ; Super + space
+#+END_SRC
+
+** multiple-cursors
+
+#+BEGIN_SRC emacs-lisp
+  (require 'multiple-cursors)
+  ; When you have an active region that spans multiple lines, the following will add a cursor to each line.
+  (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+
+  ; When you want to add multiple cursors not based on continuous lines, but based on keywords in the buffer.
+  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+#+END_SRC
+
+** expand-region
+   #+BEGIN_SRC emacs-lisp
+   (global-set-key (kbd "C-=") 'er/expand-region)
+   ; C-- and then C-= again to select back
+   #+END_SRC
+** ace-window
+   #+BEGIN_SRC emacs-lisp
+   (global-set-key (kbd "C-x o") 'ace-window)
+   #+END_SRC
+** BROKEN js2r-kill to C-k
+;   #+BEGIN_SRC emacs-lisp
+     (define-key js2-mode-map (kbd "C-k") #'js2r-kill)
+   #+END_SRC
+* eshell
+* Publishing and task management with Org-mode
+** org-lists
+*** BROKEN local
+;     #+BEGIN_SRC emacs-lisp
+       '(org-agenda-files
+	 (quote
+	  ("/home/CLOUD/syncthing/org/org.org" "/home/CLOUD/syncthing/org/toPay.org" "/home/CLOUD/syncthing/org/events.org" "/home/CLOUD/syncthing/org/ideas.org")))
+     #+END_SRC
+
+** Display preferences
+*** org
+**** hide emphasis
+    #+BEGIN_SRC emacs-lisp
+      (setq org-hide-emphasis-markers t)
+    #+END_SRC
+**** Displays org-mode having bullets
+
+    #+BEGIN_SRC emacs-lisp
+      (add-hook 'org-mode-hook
+    	    (lambda ()
+    	      (org-bullets-mode t)))
+    
+      (setq org-hide-leading=stars t)
+    #+END_SRC
+
+**** TESTING Priorities customization
+     #+BEGIN_SRC emacs-lisp
+       (use-package org-fancy-priorities
+	 :ensure t
+	 :hook
+	 (org-mode . org-fancy-priorities-mode)
+	 :config
+	 (setq org-fancy-priorities-list '("⚡" "⚙" "⬇" "⏳")))
+	 ;; further customizations
+	 (setq org-fancy-priorities-list '((?A . "❗")
+					 (?B . "⚙")
+					 (?C . "⬇")
+					 (?D . "⏳")
+					 (?1 . "⚡")
+					 (?2 . "⮬")
+					 (?3 . "⮮")
+					 (?4 . "⏳")
+					 (?I . "Important")))
+     
+     #+END_SRC 
+
+**** Syntax highlight in source blocks
+    
+    #+BEGIN_SRC emacs-lisp
+      (setq org-src-fontify-natively t)
+    #+END_SRC
+
+**** Change ellipsis form
+    #+BEGIN_SRC emacs-lisp
+      (setq org-ellipsis "⏎")
+    #+END_SRC
+    
+*** calendar
+**** TODO calenda view (draw)
+;     #+BEGIN_SRC emacs-lisp
+       (use-package calfw
+       :ensure ;TODO:
+       :config
+       (require 'calfw)
+       (require 'calfw-org)
+;       (setq cfw:org-overwrite-default-keybinding t)
+;       (require 'calfw-ical)
+;
+;       (defun mycalendar ()
+;       (interactive)
+;       (cfw:open-calendar-buffer
+;       :contents-sources
+;       (list
+;       ;; (cfw:org-create-source "Green")  ; orgmode source
+;       (cfw:ical-create-source "gcal" "https://somecalnedaraddress" "IndianRed") ; devorah calender
+;       (cfw:ical-create-source "gcal" "https://anothercalendaraddress" "IndianRed") ; google calendar ICS
+;       )))
+;       (setq cfw:org-overwrite-default-keybinding t))
+
+;       (use-package calfw-gcal
+;       :ensure t
+;       :config
+;       (require 'calfw-gcal))
+     #+END_SRC
+**** TODO color codes (does not work to me)
+;     #+BEGIN_SRC emacs-lisp
+       (add-hook 'org-finalize-agenda-hook
+	 (lambda ()
+	 (save-excursion
+	 (color-org-header "Personal:"  "green")
+	 (color-org-header "home:" "gold")
+	 (color-org-header "org:"      "orange")
+	 (color-org-header "home"  "SkyBlue4"))))
+       (defun color-org-header (tag col)
+	 ""
+	 (interactive)
+	 (goto-char (point-min))
+	 (while (re-search-forward tag nil t)
+	 (add-text-properties (match-beginning 0) (point-at-eol)
+	 `(face (:foreground ,col)))))
+     #+END_SRC
+** Record time
+*** OFF done
+;    #+BEGIN_SRC emacs-lisp
+  (setq org-log-done 'time)
+    #+END_SRC
+
+*** OFF fail
+    ; #+BEGIN_SRC emacs-lisp
+     (setq org-log-done 'time)
+    #+END_SRC
+
+** todo lists
+   #+BEGIN_SRC emacs-lisp
+     (setq org-todo-keywords '((sequence
+				"TODO(t)"
+				"NEXT(n)"
+				"STARTED(s)"
+				"HOLD(h)"
+				"WAITING(w)"
+				"|"
+				"FAIL(f)"
+				"CANC(c)"
+				"DONE(d)" ) ))
+
+     (setq org-todo-keyword-faces '(
+				    ("TODO" . (:foreground "yellow"))
+				    ("NEXT" . (:foreground "DeepSkyBlue"))
+				    ("STARTED" . (:foreground "cyan"))
+				    ("HOLD" . (:foreground "firebrick"))
+				    ("WAITING" . (:foreground "brown"))
+				    ("FAIL" . (:foreground "red"))
+				    ("CANC" . (:foreground "LightSeaGreen"))
+				    ("DONE" . (:foreground "green")) ))
+   #+END_SRC   
+
+** habit
+   #+BEGIN_SRC emacs-lisp
+     (require 'org-habit)
+   #+END_SRC
+** latex
+*** margins
+    #+BEGIN_SRC emacs-lisp
+      (setq org-latex-packages-alist '(("margin=2cm" "geometry" nil)))
+    #+END_SRC
+* Expansions
+** BROKEN load block old behavior
+;  #+BEGIN_SRC
+    (load-library "org-tempo")
+;  #+END_SRC
+** block
+*** BROKEN elisp alternative
+;    #+BEGIN_SRC emacs-lisp
+    (add-to-list 'org-structure-template-alist
+             (list "p" (concat ":PROPERTIES:\n"
+                               "?\n"
+                               ":END:")))
+;    #+END_SRC
+*** BROKEN elisp
+;#+BEGIN_SRC emacs-lisp
+;; add <el for emacs-lisp expansion
+(add-to-list 'org-structure-template-alist
+         '("el" "#+BEGIN_SRC emacs-lisp\n?\n#+END_SRC"
+           "<src lang=\"emacs-lisp\">\n?\n</src>"))
+;#+END_SRC
+*** BROKEN javascript
+;    #+BEGIN_SRC emacs-lisp
+      ;; add <j for js expansion
+      (add-to-list 'org-structure-template-alist
+		   '("j" "#+BEGIN_SRC js\n?\n#+END_SRC"
+		     "<src lang=\"javascript\">\n?\n</src>")
+      )
+#+END_SRC
+*** TODO js2-mode for js
+;    #+BEGIN_SRC emacs-lisp
+    ;; add <j for js expansion
+    (add-to-list 'org-structure-template-alist
+         '("j" "#+BEGIN_SRC js2\n?\n#+END_SRC"
+           "<src lang=\"js2\">\n?\n</src>"))
+#+END_SRC
+*** BROKEN css
+;    #+BEGIN_SRC emacs-lisp
+      ;; add <cs for css expansion
+      (add-to-list 'org-structure-template-alist
+		   '("cs" "#+BEGIN_SRC css\n?\n#+END_SRC"
+		     "<src lang=\"css\">\n?\n</src>")
+      )
+	   #+END_SRC
+** elfeed
+*** installation and configuration
+**** elfeed
+    #+BEGIN_SRC emacs-lisp
+      (use-package elfeed
+	:ensure t
+	:bind (:map elfeed-search-mode-map
+		    ("q" . bjm/elfeed-save-db-and-bury)
+		    ("m" . elfeed-toggle-star)
+		    ("j" . mz/make-and-run-elfeed-hydra)
+		    )
+	)
+    #+END_SRC
+**** hydra definitions
+    #+BEGIN_SRC emacs-lisp
+      (defun z/hasCap (s) ""
+	     (let ((case-fold-search nil))
+	       (string-match-p "[[:upper:]]" s)
+	       )
+	     )
+
+      (defun z/get-hydra-option-key (s)
+	"returns single upper case letter (converted to lower) or first"
+	(interactive)
+	(let ( (loc (z/hasCap s)))
+	  (if loc
+	  ;; uncomment downcase to convert the shortcut to lower
+      ;	(downcase
+	       (substring s loc (+ loc 1))
+      ;	 )
+	    (substring s 0 1)
+	    )
+	  )
+	)
+
+      (defun mz/make-elfeed-cats (tags)
+	"Returns a list of lists. Each one is line for the hydra configuratio in the form (c function hint)"
+	(interactive)
+	(mapcar (lambda (tag)
+		  (let* (
+			 (tagstring (symbol-name tag))
+			 (c (z/get-hydra-option-key tagstring))
+			 )
+		    (list c (append '(elfeed-search-set-filter) (list (format "@6-months-ago +%s" tagstring)))tagstring  )))
+		tags))
+
+      (defmacro mz/make-elfeed-hydra ()
+	`(defhydra mz/hydra-elfeed ()
+	   "filter"
+	   ;,@(mz/make-elfeed-cats (elfeed-db-get-all-tags))
+	   ;("c" (elfeed-search-set-filter "@6-months-ago +cs") "cs")
+	   ;("e" (elfeed-search-set-filter "@6-months-ago +emacs") "emacs")
+	   ;("d" (elfeed-search-set-filter "@6-months-ago +education") "education")
+	   ("*" (elfeed-search-set-filter "@6-months-ago +star") "Starred")
+	   ("M" elfeed-toggle-star "Mark")
+	   ("A" (elfeed-search-set-filter "@6-months-ago") "All")
+	   ("T" (elfeed-search-set-filter "@1-day-ago") "Today")
+	   ("Q" bjm/elfeed-save-db-and-bury "Quit Elfeed" :color blue)
+	   ("q" nil "quit" :color blue)
+	   ))
+
+      (defun mz/make-and-run-elfeed-hydra ()
+	""
+	(interactive)
+	(mz/make-elfeed-hydra)
+	(mz/hydra-elfeed/body)
+	)
+    #+END_SRC
+**** db-directory
+     #+BEGIN_SRC emacs-lisp
+       (setq elfeed-db-directory "/home/CLOUD/syncthing/feed/elfeeddb")
+     #+END_SRC
+**** elfeed-org
+    #+BEGIN_SRC emacs-lisp
+      ;; use an org file to organise feeds
+      (use-package elfeed-org
+        :ensure t
+        :config
+        (elfeed-org)
+        (setq rmh-elfeed-org-files (list "/home/CLOUD/syncthing/feed/elfeed.org"))
+      )
+    #+END_SRC
+**** OFF manual list of feeds
+;    #+BEGIN_SRC emacs-lisp
+      (setq elfeed-feeds
+	    '("http://nullprogram.com/feed/"
+	      "http://planet.emacsen.org/atom.xml"))
+    #+END_SRC
+**** elfeed-goodies
+     #+BEGIN_SRC emacs-lisp
+      ;; things like: read on the elfeed buffed
+      (use-package elfeed-goodies
+        :ensure t
+        :config
+        (elfeed-goodies/setup)
+      )
+    #+END_SRC 
+*** syncronization
+**** TODO read elfeed index before opening
+; #+BEGIN_SRC emacs-lisp
+      ;;functions to support syncing .elfeed between machines
+      ;;makes sure elfeed reads index from disk before launching
+      (defun bjm/elfeed-load-db-and-open ()
+	"Wrapper to load the elfeed db from disk before opening"
+	(interactive)
+	(elfeed)
+	(elfeed-db-load)
+	(elfeed-search-update--force))
+
+ #+END_SRC
+
+**** TESTING write to disk when quitting.
+      #+BEGIN_SRC emacs-lisp
+      ;;write to disk when quiting
+      (defun bjm/elfeed-save-db-and-bury ()
+	"Wrapper to save the elfeed db to disk before burying buffer"
+	(interactive)
+	(elfeed-db-save)
+	(quit-window))
+      #+END_SRC
+
+*** TESTING mark-all as read
+ #+BEGIN_SRC emacs-lisp
+      (defun elfeed-mark-all-as-read ()
+	(interactive)
+	(mark-whole-buffer)
+	(elfeed-search-untag-all-unread)
+      )
+ #+END_SRC
+*** TESTING toggle star tag
+ #+BEGIN_SRC emacs-lisp
+      (defalias 'elfeed-toggle-star
+	(elfeed-expose #'elfeed-search-toggle-all 'star)
+      )
+ #+END_SRC
+*** OFF bookmarks configuration
+;    #+BEGIN_SRC emacs-lisp
+      ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+      ;; elfeed feed reader                                                     ;;
+      ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+      ;;shortcut functions
+      (defun bjm/elfeed-show-all ()
+	(interactive)
+	(bookmark-maybe-load-default-file)
+	(bookmark-jump "elfeed-all"))
+      (defun bjm/elfeed-show-music ()
+	(interactive)
+	(bookmark-maybe-load-default-file)
+	(bookmark-jump "elfeed-music"))
+      (defun bjm/elfeed-show-blogs ()
+	(interactive)
+	(bookmark-maybe-load-default-file)
+	(bookmark-jump "elfeed-blogs"))
+      (defun bjm/elfeed-show-security ()
+	(interactive)
+	(bookmark-maybe-load-default-file)
+	(bookmark-jump "elfeed-security"))
+    #+END_SRC
+** TESTING ag
+   used by xref-js2
+   #+BEGIN_SRC emacs-lisp
+     (require 'ag)
+   #+END_SRC
+** TESTING js
+*** js2-mode
+   #+BEGIN_SRC emacs-lisp
+     (require 'js2-mode)
+     (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+     ;; Better imenu
+     (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+   #+END_SRC
+*** js2-refactor and xref-js2
+    #+BEGIN_SRC emacs-lisp
+      (require 'js2-refactor)
+      (require 'xref-js2)
+
+      (add-hook 'js2-mode-hook #'js2-refactor-mode)
+      (js2r-add-keybindings-with-prefix "C-c C-r")
+      (define-key js2-mode-map (kbd "C-k") #'js2r-kill)
+
+      ;; js-mode (which js2 is based on) binds "M-." which conflicts with xref, so
+      ;; unbind it.
+      (define-key js-mode-map (kbd "M-.") nil)
+
+      (add-hook 'js2-mode-hook (lambda ()
+	(add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
+    #+END_SRC
+*** COMMENT tern for autocompletions (requires npm on host)
+;    ~# npm install -g tern~ on the host for first, then it works
+    #+BEGIN_SRC emacs-lisp
+      (require 'company)
+      (require 'company-tern)
+
+      (add-to-list 'company-backends 'company-tern)
+      (add-hook 'js2-mode-hook (lambda ()
+				 (tern-mode)
+				 (company-mode)))
+                           
+      ;; Disable completion keybindings, as we use xref-js2 instead
+      (define-key tern-mode-keymap (kbd "M-.") nil)
+      (define-key tern-mode-keymap (kbd "M-,") nil)
+    #+END_SRC
+* Visual preferences
+** TESTING inline images globally on
+   inine-images can also be manually enabled with C-c C-x C-v
+   #+begin_src emacs-lisp
+     (setq org-startup-with-inline-images t)
+   #+end_src
+** line wrapping
+   some modes auto set some values, this is why there's a disabled section.
+*** general
+**** OFF word wrap
+;    #+BEGIN_SRC emacs-lisp
+    (add-hook 'org-mode-hook 'toggle-word-wrap)
+    #+END_SRC
+
+**** OFF visual line mode
+;    #+BEGIN_SRC emacs-lisp
+    (global-visual-line-mode 1)
+    #+END_SRC
+**** TODO wrap at windows edge
+;    #+BEGIN_SRC emacs-lisp
+
+    #+END_SRC
+*** disabled defaults
+**** org-mode
+     #+begin_src emacs-lisp
+     (add-hook 'org-mode-hook #'toggle-truncate-lines)
+     #+end_src
+** OFF auto identation
+;    #+BEGIN_SRC emacs-lisp
+      (setq org-startup-indented t)
+    #+END_SRC
+* Syntax Highlight
+** TESTING mikrotik rsc
+   rsc is similar to rcl so this mode can be used
+   #+BEGIN_SRC emacs-lisp
+   (add-to-list 'auto-mode-alist '("\\.rsc\\'" . tcl-mode))
+   #+END_SRC
+* notes if sharing:
+- personal informations
+- org list links
+- gcal credentials
+- company-tern requires tern to be installed on the host
+  ~# npm install -g tern~

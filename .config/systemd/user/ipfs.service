@@ -1,0 +1,11 @@
+[Unit]
+Description=IPFS Daemon
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/ipfs daemon --enable-gc --migrate
+Restart=on-failure
+Nice=18
+
+[Install]
+WantedBy=default.target

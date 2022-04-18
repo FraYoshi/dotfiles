@@ -1,0 +1,132 @@
+<!DOCTYPE patchbay>
+<patchbay name="JACK-patch-new" version="0.9.5">
+ <output-sockets>
+  <socket type="jack-audio" exclusive="off" name="mix-ALL" client="jack_mixer">
+   <plug>ALL\ R</plug>
+   <plug>ALL\ L</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" name="line" client="Family\ 17h\ \(Models\ 00h\-0fh\)\ HD\ Audio\ Controller\ Analog\ Stereo">
+   <plug>capture_FL</plug>
+   <plug>capture_FR</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" name="chromium" client="Chromium">
+   <plug>output_FL</plug>
+   <plug>output_FR</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" name="vlc" client="vlc_[0-9]+">
+   <plug>vlc_[0-9]+_out_1</plug>
+   <plug>vlc_[0-9]+_out_2</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" name="mpv" client="mpv*">
+   <plug>out_1</plug>
+   <plug>out_0</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" name="audacious" client="audacious">
+   <plug>out_1</plug>
+   <plug>out_0</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" name="mix-chromium" client="jack_mixer">
+   <plug>chromium\ Out\ L</plug>
+   <plug>chromium\ Out\ R</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" name="mix-mpv" client="jack_mixer">
+   <plug>mpv\ Out\ R</plug>
+   <plug>mpv\ Out\ L</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" name="mix-vlc" client="jack_mixer">
+   <plug>vlc\ Out\ L</plug>
+   <plug>vlc\ Out\ R</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" name="mix-aud" client="jack_mixer">
+   <plug>audacious\ Out\ R</plug>
+   <plug>audacious\ Out\ L</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" name="mix-line" client="jack_mixer">
+   <plug>line\ Out\ R</plug>
+   <plug>line\ Out\ L</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" name="mixmon-ALL" client="jack_mixer\-mon">
+   <plug>ALL\ L</plug>
+   <plug>ALL\ R</plug>
+  </socket>
+ </output-sockets>
+ <input-sockets>
+  <socket type="jack-audio" exclusive="off" name="mix-line" client="jack_mixer">
+   <plug>line\ L</plug>
+   <plug>line\ R</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" name="mixmon-line" client="jack_mixer\-mon">
+   <plug>line\ L</plug>
+   <plug>line\ R</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" name="mix-chromium" client="jack_mixer">
+   <plug>chromium\ L</plug>
+   <plug>chromium\ R</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" name="mixmon-chromium" client="jack_mixer\-mon">
+   <plug>chromium\ L</plug>
+   <plug>chromium\ R</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" name="mix-vlc" client="jack_mixer">
+   <plug>vlc\ L</plug>
+   <plug>vlc\ R</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" name="mixmon-vlc" client="jack_mixer\-mon">
+   <plug>vlc\ L</plug>
+   <plug>vlc\ R</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" name="mix-mpv" client="jack_mixer">
+   <plug>mpv\ L</plug>
+   <plug>mpv\ R</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" name="mixmon-mpv" client="jack_mixer\-mon">
+   <plug>mpv\ L</plug>
+   <plug>mpv\ R</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" name="mix-aud" client="jack_mixer">
+   <plug>audacious\ R</plug>
+   <plug>audacious\ L</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" name="mixmon-aud" client="jack_mixer\-mon">
+   <plug>audacious\ L</plug>
+   <plug>audacious\ R</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" name="OBS-IN" client="JACK\-OBS\-IN">
+   <plug>in_1</plug>
+   <plug>in_2</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" name="OBS-mic" client="JACK\-OBS\-mic">
+   <plug>in_2</plug>
+   <plug>in_1</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" name="calf-line-analyze" client="Calf\ Studio\ Gear">
+   <plug>Analyzer\ In\ \#2</plug>
+   <plug>Analyzer\ In\ \#1</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" name="Family\ 17h\ \(Models\ 00h\-0fh\)\ HD\ Audio\ Controller\ Analog\ Stereo 1" client="Family\ 17h\ \(Models\ 00h\-0fh\)\ HD\ Audio\ Controller\ Analog\ Stereo">
+   <plug>playback_FL</plug>
+   <plug>playback_FR</plug>
+  </socket>
+ </input-sockets>
+ <slots/>
+ <cables>
+  <cable type="jack-audio" output="line" input="mixmon-line"/>
+  <cable type="jack-audio" output="line" input="mix-line"/>
+  <cable type="jack-audio" output="chromium" input="mix-chromium"/>
+  <cable type="jack-audio" output="chromium" input="mixmon-chromium"/>
+  <cable type="jack-audio" output="vlc" input="mix-vlc"/>
+  <cable type="jack-audio" output="vlc" input="mixmon-vlc"/>
+  <cable type="jack-audio" output="mpv" input="mix-mpv"/>
+  <cable type="jack-audio" output="mpv" input="mixmon-mpv"/>
+  <cable type="jack-audio" output="audacious" input="mix-aud"/>
+  <cable type="jack-audio" output="audacious" input="mixmon-aud"/>
+  <cable type="jack-audio" output="mix-line" input="OBS-mic"/>
+  <cable type="jack-audio" output="mix-line" input="calf-line-analyze"/>
+  <cable type="jack-audio" output="mix-chromium" input="OBS-IN"/>
+  <cable type="jack-audio" output="mix-mpv" input="OBS-IN"/>
+  <cable type="jack-audio" output="mix-vlc" input="OBS-IN"/>
+  <cable type="jack-audio" output="mix-aud" input="OBS-IN"/>
+  <cable type="jack-audio" output="mixmon-ALL" input="Family\ 17h\ \(Models\ 00h\-0fh\)\ HD\ Audio\ Controller\ Analog\ Stereo 1"/>
+ </cables>
+</patchbay>
+

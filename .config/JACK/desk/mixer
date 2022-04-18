@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<jack_mixer geometry="480x417" paned_position="421" visible="True">
+	<input_channel name="audacious" type="stereo" direct_output="True" volume="-8.416875" balance="0.000000" wide="False" out_mute="False" volume_midi_cc="11" balance_midi_cc="12" mute_midi_cc="13" solo_midi_cc="14"/>
+	<input_channel name="vlc" type="stereo" direct_output="True" volume="0.000000" balance="0.000000" wide="False" out_mute="False" volume_midi_cc="22" balance_midi_cc="23" mute_midi_cc="24" solo_midi_cc="25"/>
+	<input_channel name="mic" type="stereo" direct_output="True" volume="0.000000" balance="0.000000" wide="False" out_mute="False" volume_midi_cc="15" balance_midi_cc="16" mute_midi_cc="17" solo_midi_cc="18"/>
+	<input_channel name="pulse" type="stereo" direct_output="True" volume="0.000000" balance="0.000000" wide="False" out_mute="False" volume_midi_cc="26" balance_midi_cc="27" mute_midi_cc="28" solo_midi_cc="29"/>
+	<input_channel name="mpv" type="stereo" direct_output="True" volume="-15.407773" balance="0.000000" wide="False" out_mute="False" volume_midi_cc="30" balance_midi_cc="31" mute_midi_cc="32" solo_midi_cc="33"/>
+	<input_channel name="mic-effects" type="stereo" direct_output="True" volume="0.000000" balance="0.000000" wide="False" out_mute="False" volume_midi_cc="34" balance_midi_cc="35" mute_midi_cc="36" solo_midi_cc="37"/>
+	<input_channel name="chromium" type="stereo" direct_output="True" volume="-34.805655" balance="0.000000" wide="True" out_mute="False" volume_midi_cc="42" balance_midi_cc="43" mute_midi_cc="44" solo_midi_cc="45"/>
+	<input_channel name="cam-mic" type="mono" direct_output="True" volume="-10.061027" balance="0.000000" wide="True" out_mute="False" volume_midi_cc="38" balance_midi_cc="39" mute_midi_cc="40" solo_midi_cc="41"/>
+	<output_channel name="out" type="stereo" color="rgba(0,0,0,0)" volume="-4.862884" balance="0.000000" wide="False" out_mute="False" volume_midi_cc="19" balance_midi_cc="20" mute_midi_cc="21"/>
+	<gui_factory confirm-quit="True" default_meter_scale="linear_70dB" default_project_path="" default_slider_scale="linear_70dB" midi_behavior_mode="0" use_custom_widgets="True" vumeter_color="#ccccb3b30000" vumeter_color_scheme="default"/>
+</jack_mixer>

@@ -1,0 +1,15 @@
+UpdateInterval=3
+TimeScale=0
+Size=128
+Frame=0
+Border=0
+Bars=0
+TrackedCore=0
+InTerminal=1
+StartupNotification=1
+ColorMode=2
+Foreground1=rgb(0,255,252)
+Foreground2=rgb(0,50,255)
+Background=rgb(0,0,19)
+PerCore=0
+

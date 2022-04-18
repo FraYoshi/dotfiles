@@ -1,0 +1,12 @@
+[Unit]
+Description=Zeronet Daemon
+After=network.target
+
+[Service]
+Type=simple
+#ExecStart=/home/frayoshi/.zeronet/runtime/bin/python3 /home/frayoshi/.zeronet/core/zeronet.py
+ExecStart=/home/frayoshi/bin/zeronet-conservancy.sh
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

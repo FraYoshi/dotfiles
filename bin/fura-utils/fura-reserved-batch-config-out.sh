@@ -1,0 +1,1 @@
+/home/frayoshi/git/fura-utils/bin/licensing/fura-reserved-batch-config-out.sh

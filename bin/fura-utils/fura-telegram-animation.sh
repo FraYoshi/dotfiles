@@ -1,0 +1,1 @@
+/home/frayoshi/git/fura-utils/bin/ffmpeg/fura-telegram-animation.sh

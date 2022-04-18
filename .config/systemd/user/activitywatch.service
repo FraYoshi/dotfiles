@@ -1,0 +1,11 @@
+[Unit]
+Description=ActivityWatch Server
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=aw-qt
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

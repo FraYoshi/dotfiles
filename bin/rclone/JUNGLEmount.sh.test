@@ -1,0 +1,15 @@
+#!/bin/bash -
+# echo -e "inserire folder google"
+# read folder
+## Jungle mount
+export mountDir="/mnt/digital-jungle"
+export mediaDir="/n/home/media/jungle-mount"
+export cacheDir="/home/frayoshi/.cache/rclone/jungle-cache"
+export driveFID="0ALuGQlcAKq2WUk9PVA"
+export drivePath="gd:"
+rclone mount --drive-root-folder-id "$driveFID" \
+       --vfs-read-chunk-size 5M --vfs-read-chunk-size-limit 20M --vfs-cache-mode full \
+       --dir-cache-time 24h0m0s --cache-dir "$cacheDir" \
+       "$drivePath" "$mountDir" && echo "mounting complete"
+encfs "$mountDir" "$mediaDir"
+#    encfs /mnt/digital-jungle /home/media/jungle-mount

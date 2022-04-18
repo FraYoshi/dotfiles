@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>Open Terminal Here</name>
+	<unique-id>1520677036306617-1</unique-id>
+	<command>exo-open --working-directory %f --launch TerminalEmulator</command>
+	<description>Example for a custom action</description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon>spacemacs</icon>
+	<name>eShell Here</name>
+	<unique-id>1647493040150589-1</unique-id>
+	<command>emacsclient -e &apos;(eshell t)&apos; --create-frame</command>
+	<description>open an emacs shell here</description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon>emacs</icon>
+	<name>Emacs Here</name>
+	<unique-id>1577757111388008-1</unique-id>
+	<command>emacsclient --create-frame %f</command>
+	<description></description>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>stock_text-monospaced</icon>
+	<name>JP-Emacs here</name>
+	<unique-id>1596086085778954-1</unique-id>
+	<command>LC_CTYPE=ja_JP.UTF-8 emacsclient --create-frame %f</command>
+	<description></description>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>gnome-mpv</icon>
+	<name>mpv video</name>
+	<unique-id>1634543789160211-1</unique-id>
+	<command>mpv %F</command>
+	<description>open video with mpv</description>
+	<patterns>*</patterns>
+	<video-files/>
+</action>
+<action>
+	<icon>mpv</icon>
+	<name>mpv audio</name>
+	<unique-id>1634544340211700-2</unique-id>
+	<command>xfce4-terminal -x mpv %F</command>
+	<description>mpv for audio via terminal</description>
+	<patterns>*</patterns>
+	<audio-files/>
+</action>
+<action>
+	<icon>0ad</icon>
+	<name>nukeind</name>
+	<unique-id>1641003823189941-1</unique-id>
+	<command>xfce4-terminal -H -x /opt/nuke/Nuke13.1v1/Nuke13.1 --indie %f</command>
+	<description></description>
+	<patterns>*.nkind;*.nkind~;*.hroxind;*hroxind.autosave</patterns>
+	<text-files/>
+</action>
+</actions>

@@ -1,0 +1,14 @@
+;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8-emacs -*-
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("org-capture-last-stored"
+ (filename . "/home/CLOUD/syncthing/roam/dired_mode.org")
+ (front-context-string . "we could call it")
+ (rear-context-string . "-04-04 月 07:36]\n")
+ (position . 117))
+("elfeed-all"
+ (location . "@6-months-ago +unread")
+ (tags "unread")
+ (handler . elfeed-search-bookmark-handler))
+)

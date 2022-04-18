@@ -1,0 +1,7 @@
+[Shortcuts]
+KisToolSelectOutline=Ctrl+°
+KritaShape/KisToolBrush=B; Ctrl+Shift+Ç
+erase_action=E; Ctrl+Shift+É
+reset_canvas_rotation=Ctrl+Alt+Space
+rotate_canvas_left=Ctrl+Shift+Left
+rotate_canvas_right=Ctrl+Shift+Right

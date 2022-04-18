@@ -1,0 +1,27 @@
+format = """
+$time\
+$user\
+$all\
+$directory\
+$character\
+"""
+
+add_newline = false
+
+[line_break]
+disabled = true
+
+[character]
+error_symbol = "[✗](bold red) "
+#success_symbol = "[➜](bold green)"
+
+[time]
+disabled = false
+style = "bold bright-black"
+format = "[$time]($style)"
+
+[gcloud]
+disabled = true
+
+[nodejs]
+disabled = true

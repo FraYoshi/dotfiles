@@ -1,0 +1,1 @@
+/home/frayoshi/git/fura-utils/bin/licensing/fura-morning-fog.sh

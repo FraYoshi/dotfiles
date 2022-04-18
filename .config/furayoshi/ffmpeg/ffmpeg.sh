@@ -1,0 +1,19 @@
+#!/bin/bash -
+set -a
+
+# CONCAT
+CONCATLIST=concat-list.txt
+
+# CUT
+CUTSUFFIX=-cut
+
+# GIF
+GIFFPS=10
+GIFSCALE=120:-1
+
+# timelapse
+TIMELAPSENAME=timelapse_
+TIMELAPSEEXT=png
+TIMELAPSERESOLUTION=1920X1080
+CAPTURECOORD=
+set +a

@@ -1,0 +1,10 @@
+conky.config = {
+    minimum_height = 400,
+    minimum_width = 600,
+    font = 'Noto Sans CJK TC Regular:size=40',
+    use_xft = true,
+ };
+conky.text = [[
+ start  ${exec cat chars}  end
+ ${font Noto Sans CJK TC Bold:size=20} start ${exec cat chars} end ${font}
+]]
