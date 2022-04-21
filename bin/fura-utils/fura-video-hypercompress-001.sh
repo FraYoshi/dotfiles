@@ -1,1 +1,0 @@
-/home/frayoshi/git/fura-utils/bin/ffmpeg/fura-video-hypercompress-001.sh
