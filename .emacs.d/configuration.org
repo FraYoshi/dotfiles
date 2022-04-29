@@ -210,7 +210,7 @@
 	   "%?"
 	   :if-new (file+head "${slug}.org" "#+title: ${title}\n#+date: %U\n#+filetags:")
 	   :unnarrowed t)
-	  ("I" "index" plain
+	  ("I" "Index" plain
 	   "%?"
 	   :if-new (file+head "${slug}.org" "#+title: ${title}\n#+date: %U\n#+filetags: index\n")
 	   :unnarrowed t)
@@ -222,13 +222,17 @@
 	   "%?"
 	   :if-new (file+head "${slug}.org" "#+title: ${title}\n#+date: %U\n#+filetags: people\n")
 	   :unnarrowed t)
-	  ("s" "sogno" plain
+	  ("S" "Sogno" plain
 	   "%?"
 	   :if-new (file+head "sogni/sogno-%<%Y-%m-%d>.org" "#+title: sogno %<%Y-%m-%d>\n#+filetags: sogno\n")
 	   :unnarrowed t)
 	  ("c" "coding" plain
 	   "%?"
 	   :if-new (file+head "${slug}.org" "#+title: ${title}\n#+date: %U\n#+filetags: coding\n")
+	   :unnarrowed t)
+	  ("s" "software" plain
+	   "%?"
+	   :if-new (file+head "${slug}.org" "#+title: ${title}\n#+date: %U\n#+filetags: software\n")
 	   :unnarrowed t)
 	  ))
        :bind (("C-c n l" . org-roam-buffer-toggle)

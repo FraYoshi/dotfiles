@@ -577,7 +577,8 @@
          id="exportarea"
          value="page" />
       <group
-         id="defaultxdpi" />
+         id="defaultxdpi"
+         value="100" />
     </group>
     <group
        id="save_as"
