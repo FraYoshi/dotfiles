@@ -46,7 +46,7 @@ PERL5LIB="/home/frayoshi/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5
 PERL_LOCAL_LIB_ROOT="/home/frayoshi/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/frayoshi/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/frayoshi/perl5"; export PERL_MM_OPT;
-PATH=$PATH:~/bin:~/bin/scripts:~/bin/mount:~/bin/rclone:~/go/bin:/home/frayoshi/.gem/ruby/2.6.0/bin:/var/lib/flatpak/exports/share:/usr/bin/vendor_perl:/usr/bin/vendor_perl/exiftool:~/bin/fura-utils:~/bin/fura-utils-local
+PATH=$PATH:~/bin:~/bin/scripts:~/bin/mount:~/bin/rclone:~/go/bin:/home/frayoshi/.gem/ruby/2.6.0/bin:/var/lib/flatpak/exports/share:/usr/bin/vendor_perl:/usr/bin/vendor_perl/exiftool:~/.local/bin:~/bin/fura-utils:~/bin/fura-utils-local
 
 # transfer.sh
 transfer() { if [ $# -eq 0 ]; then echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi
@@ -54,7 +54,10 @@ tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | s
 
 # Map button 8 and 9 (laterals) to button 2 (middle button)
 my_mouse_id=$(xinput | grep "Logitech M705" | sed 's/^.*id=\([0-9]*\)[ \t].*$/\1/')
-[ $my_mouse_id ] && xinput set-button-map $my_mouse_id 1 2 3 4 5 6 7 2 2 10
+#[ $my_mouse_id ] && xinput set-button-map $my_mouse_id 1 2 3 4 5 6 7 2 2 10
+# Map button 8 and 9 (laterals) to button 2 (middle button)
+# and 10 to RCM
+[ $my_mouse_id ] && xinput set-button-map $my_mouse_id 1 2 3 4 5 6 7 2 2 3
 
 ## Map button 8 and 9 (laterals) to button 2 (middle button)
 my_ergomouse_id=$(xinput | grep -F "MOSART Semi. 2.4G Wireless Mouse" | grep -Fiv "control" | sed 's/^.*id=\([0-9]*\)[ \t].*$/\1/')
