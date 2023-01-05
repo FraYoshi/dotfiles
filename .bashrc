@@ -1,4 +1,5 @@
 export VISUAL=vim
+export EDITOR='emacsclient --create-frame'
 export HISTCONTROL=ignoreboth:erasedups
 export HISTIGNORE='emoj *'
 
@@ -46,7 +47,8 @@ PERL5LIB="/home/frayoshi/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5
 PERL_LOCAL_LIB_ROOT="/home/frayoshi/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/frayoshi/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/frayoshi/perl5"; export PERL_MM_OPT;
-PATH=$PATH:~/bin:~/bin/scripts:~/bin/mount:~/bin/rclone:~/go/bin:/home/frayoshi/.gem/ruby/2.6.0/bin:/var/lib/flatpak/exports/share:/usr/bin/vendor_perl:/usr/bin/vendor_perl/exiftool:~/.local/bin:~/bin/fura-utils:~/bin/fura-utils-local
+GOPATH="$HOME/go"
+PATH=$PATH:~/bin:~/bin/scripts:~/bin/mount:~/bin/rclone:~/go/bin:/home/frayoshi/.gem/ruby/2.6.0/bin:/var/lib/flatpak/exports/share:/usr/bin/vendor_perl:/usr/bin/vendor_perl/exiftool:~$GOPATH:/bin:~/.local/bin:~/bin/fura-utils:~/bin/fura-utils-local
 
 # transfer.sh
 transfer() { if [ $# -eq 0 ]; then echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi
@@ -64,9 +66,9 @@ my_ergomouse_id=$(xinput | grep -F "MOSART Semi. 2.4G Wireless Mouse" | grep -Fi
 [ $my_ergomouse_id ] && xinput set-button-map $my_ergomouse_id 1 2 3 4 5 6 7 2 2 10
 
 # Map tablet
-tab_id=$(xinput | grep "HID 256c:006e Pad" | sed 's/^.*id=\([0-9]*\)[ \t].*$/\1/')
+#tab_id=$(xinput | grep "HID 256c:006e Pad" | sed 's/^.*id=\([0-9]*\)[ \t].*$/\1/')
 #xinput set-button-map $tab_id 1 2 3 4 5 6 7 4 5 2 11 12 13 14 15 16
-[ $tab_id ] && xinput set-button-map $tab_id 10 11 12 0 0 0 0 13 14 4 5 17 4 5 5
+#[ $tab_id ] && xinput set-button-map $tab_id 10 11 12 0 0 0 0 13 14 4 5 17 4 5 5
 
 # export JAVA_HOME=/usr/lib/jvm/java-8-openjdk/jre
 
@@ -90,6 +92,27 @@ tab_id=$(xinput | grep "HID 256c:006e Pad" | sed 's/^.*id=\([0-9]*\)[ \t].*$/\1/
 #export PS1="\[\e[0;32m\][ \[\e[0;33m\]\u\[\e[0;37m\]@\[\e[0;34m\]\h \[\e[0;32m\]] \[\e[0;37m\]\w \[\e[0;31m\]<\$?> \[\e[0;37m\]$ \[\e[0m\]"
 export PS1="\[\e[0;32m\][ \[\e[0;33m\]\u\[\e[0;37m\]@\[\e[0;34m\]\h \t \[\e[0;32m\]] \[\e[0;35m\]<\$?> \[\e[0;37m\]\w \[\e[0;37m\]$ \[\e[0m\]"
 
+
+## GPG as default ssh-agent
+# from https://github.com/drduh/YubiKey-Guide
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+#gpg-connect-agent updatestartuptty /bye > /dev/null
+gpgconf --launch gpg-agent
+
+### from https://medium.com/@chrispisano/ssh-authentication-with-gpg-411676781647
+## GPG-Agent
+#unset SSH_AGENT_PID
+#if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+#  export SSH_AUTH_SOCK="${HOME}/.gnupg/S.gpg-agent.ssh"
+#fi
+#export GPG_TTY=$(tty)
+
+#SSH_AGENT_PID=""
+#SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"
+
+
+
 ## exec fish instead of bash as default
 #[[ $(ps --no-header --pid=$PPID --format=cmd) != "fish" ]] && \
 #    exec fish
@@ -99,9 +122,3 @@ export PS1="\[\e[0;32m\][ \[\e[0;33m\]\u\[\e[0;37m\]@\[\e[0;34m\]\h \t \[\e[0;32
 
 # The next line enables shell command completion for gcloud.
 [ -f '/opt/ABC/google-cloud-sdk/completion.bash.inc' ] && . '/opt/ABC/google-cloud-sdk/completion.bash.inc'
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/archive/HOME/Downloads/google-cloud-sdk/path.bash.inc' ]; then . '/home/archive/HOME/Downloads/google-cloud-sdk/path.bash.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/archive/HOME/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/home/archive/HOME/Downloads/google-cloud-sdk/completion.bash.inc'; fi
